@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>HTML Tags for Media/Canvas</title>
+
+    <script>
+
+        window.onload = function(){
+            var canvas = document.getElementById("paper"),
+            c = canvas.getContext("2d");
+
+            canvas.width;
+            canvas.height;
+
+            c.rect(0, 0, 1000, 1000);
+            c.fillStyle = "black";
+            c.fill();
+
+            c.font="100px Verdana";
+
+            var gradient = c.createLinearGradient(0, 0, canvas.width, 0);
+            gradient.addColorStop("0.5", "orange");
+            gradient.addColorStop("0", "blue");
+            gradient.addColorStop(".7", "green");
+
+            c.strokeStyle = gradient;
+            c.strokeText("HTML Rules", canvas.width/2, canvas.height/2);
+
+            c.beginPath();
+            c.arc(390, 445, 315, Math.PI, 2 * Math.PI);
+            c.strokeStyle = gradient;
+            c.lineWidth = 10;
+            c.stroke();
+
+            c.rect(50, 50, 50, 50);
+            c.strokeStyle = "green";
+            c.lineWidth = 5;
+            c.stroke();
+
+
+        }
+
+    </script>
+
+</head>
+
+    <body>
+
+        <canvas id="paper" width="1000" height="1000" style="border: 10px solid blue">
+
+        </canvas>
+
+    </body>
+
+ </html>
