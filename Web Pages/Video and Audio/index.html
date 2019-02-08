@@ -6,29 +6,96 @@
 <title>Study Media</title>
 
 </head>
-    
+
     <body>
-        
+
         <h1>Music for Study, and Study Breaks</h1>
-        
+
         <iframe width="560" height="315" src="https://www.youtube.com/embed/5RHTt4_XVVU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        
+
         <h2>Study Music</h2>
-        
+
         <br>
-        
-        <audio src="peritune-tavern.mp3" autoplay controls> </audio>
-        
-        <h2>Break Music</h2>
-        
-        <canvas id="canvas" width="500" height="500" style="border:10px solid #000000;"></canvas>
-        
         <br>
 
-        <button type="button" onclick="circle()">Loading Screen</button>
-        
-        <script src="index.js"></script>
-        
+        <audio src="peritune-tavern.mp3" autoplay controls> </audio>
+
+        <h2>Break Music</h2>
+
+        <br>
+        <br>
+
+        <h2>Something To Stare At</h2>
+        <canvas id="canvas" width="400" height="300" style="border:10px solid #000000;"></canvas>
+
+
+        <script>
+        // declare variables
+          var canvas, context;
+
+          // load canvas
+          canvas = document.getElementById("canvas");
+          context = canvas.getContext("2d");
+
+          function Ball(width, height, color, x, y, vx, vy) {
+            this.width = width;
+            this.height = height;
+            this.color = color;
+            this.x = x;
+            this.y = y;
+            this.vx = vx;
+            this.vy = vy;
+
+            this.checkBoundaries = function() {
+              if (this.x  > canvas.width || this.x < 0) {
+                  this.vx *= -1;
+              }
+
+              if (this.y > canvas.height || this.y < 0) {
+                  this.vy *= -1;
+              }
+            }
+
+            this.draw = function() {
+              context.fillStyle = this.color;
+              context.fillRect(this.x, this.y, this.width, this.height);
+            }
+
+            this.update = function() {
+              console.log(this.x);
+              this.x += this.vx;
+              this.y += this.vy;
+            }
+          }
+
+          var balls = [];
+          for (var i = 1; i <= 510; i++) {
+            var ball = new Ball(i, i, "blue", canvas.width / 2 - 1, canvas.height / 2 + i, i, i);
+            balls.push(ball);
+          }
+
+          // update function
+          function update() {
+              requestAnimationFrame(update);
+
+              context.clearRect(0, 0, canvas.width, canvas.height);
+
+              for (var i = 0; i < 10; i++) {
+                balls[i].checkBoundaries();
+                balls[i].update();
+                balls[i].draw();
+              }
+
+
+              // draw background and ball
+              //context.fillRect(0, 0, canvas.width, canvas.height);
+              //context.fillStyle = 'black';
+
+            }
+
+            update();
+        </script>
+
     </body>
-       
+
 </html>
